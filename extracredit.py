@@ -1,60 +1,68 @@
 import tkinter
-import tkinter.messagebox
 
-class MyGUI:
+class TestAvg:
     def __init__(self):
-        self.main_window = tkinter.Tk() 
+        self.main_window = tkinter.Tk()
 
-        self.main_window.geometry('500x200')
-        self.main_window.title('InputBox Demo')
+        self.test1_frame = tkinter.Frame(self.main_window)
+        self.test2_frame = tkinter.Frame(self.main_window)
+        self.test3_frame = tkinter.Frame(self.main_window)
+        self.avg_frame = tkinter.Frame(self.main_window)
+        self.button_frame = tkinter.Frame(self.main_window)
 
-        self.topframe = tkinter.Frame(self.main_window)
-        self.midframe = tkinter.Frame(self.main_window)
-        self.bottomframe = tkinter.Frame(self.main_window)
-
-        self.prompt_label1 = tkinter.Label(self.topframe,text='Enter the score for test 1:')
-        self.prompt_label2 = tkinter.Label(self.topframe,text='Enter the score for test 2:')
-        self.prompt_label3 = tkinter.Label(self.topframe,text='Enter the score for test 3:')
+        self.test1_label = tkinter.Label(self.test1_frame,text='Enter the score for test 1:')
+        self.test1_entry=tkinter.Entry(self.test1_frame,width=10)
         
-        self.kilo_entry = tkinter.Entry(self.topframe,width=10)
+        self.test1_label.pack(side='left')
+        self.test1_entry.pack(side='left')
 
-        self.desc_label = tkinter.Label(self.midframe,text='Converted to Miles:')
+        self.test2_label = tkinter.Label(self.test2_frame,text='Enter the score for test 2:')
+        self.test2_entry = tkinter.Entry(self.test2_frame,width=10)
 
-        self.miles_var = tkinter.StringVar()
+        self.test2_label.pack(side='left')
+        self.test2_entry.pack(side='left')
+
+        self.test3_label = tkinter.Label(self.test3_frame,text='Enter the score for test 3:')
+        self.test3_entry = tkinter.Entry(self.test3_frame,width=10)
+
+        self.test3_label.pack(side='left')
+        self.test3_entry.pack(side='left')
+
+        self.result_label = tkinter.Label(self.avg_frame,text='Average')
         
-        self.miles_label = tkinter.Label(self.midframe,textvariable=self.miles_var)
-
-        self.desc_label.pack(side='left')
-        self.miles_label.pack(side='left')
+        self.avg = tkinter.StringVar()
+        self.avg_label = tkinter.Label(self.avg_frame,textvariable=self.avg)
         
+        self.result_label.pack(side='left')
+        self.avg_label.pack(side='left')
 
-        self.prompt_label.pack(side='left')
-        self.kilo_entry.pack(side='left')
-
-        self.topframe.pack(side='top')
-        self.midframe.pack(side='top')
-        self.bottomframe.pack(side='top')
-
-        self.calc_button = tkinter.Button(self.main_window,text='Convert',command=self.convert)
-        self.quitbutton = tkinter.Button(self.main_window,text='Quit',command=self.main_window.destroy)
+        self.calc_button = tkinter.Button(self.button_frame,text='Average',command=self.calc_avg)
+        self.quit_button = tkinter.Button(self.button_frame,text='Quit',command=self.main_window.destroy)
 
         self.calc_button.pack(side='left')
-        self.quitbutton.pack(side='right')
+        self.quit_button.pack(side='left')
+
+        self.test1_frame.pack()
+        self.test2_frame.pack()
+        self.test3_frame.pack()
+        self.avg_frame.pack()
+        self.button_frame.pack()
 
         tkinter.mainloop()
 
-    def convert(self):
-        kilo = float(self.kilo_entry.get())
+    def calc_avg(self):
+        self.test1 = float(self.test1_entry.get())
+        self.test2 = float(self.test2_entry.get())
+        self.test3 = float(self.test3_entry.get())
+            
+        self.avg.set(float((self.test1 + self.test2 + self.test2)/3.0))
 
-        miles = round(kilo * 0.6214,2)
+       
 
-        #tkinter.messagebox.showinfo('Results', str(kilo) + 'kilometers is equal to ' + str(miles) + 'miles')
+test_avg = TestAvg()
 
-        self.miles_var.set(miles)
 
-myGUI = MyGUI()
 
-print('Hi there!')
 
 
 
