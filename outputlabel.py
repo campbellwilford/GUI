@@ -9,17 +9,29 @@ class MyGUI:
         self.main_window.title('InputBox Demo')
 
         self.topframe = tkinter.Frame(self.main_window)
+        self.midframe = tkinter.Frame(self.main_window)
         self.bottomframe = tkinter.Frame(self.main_window)
 
         self.prompt_label = tkinter.Label(self.topframe,text='Please enter the distance in kilometers')
         
         self.kilo_entry = tkinter.Entry(self.topframe,width=10)
 
+        self.desc_label = tkinter.Label(self.midframe,text='Converted to Miles:')
+
+        self.miles_var = tkinter.StringVar()
+        
+        self.miles_label = tkinter.Label(self.midframe,textvariable=self.miles_var)
+
+        self.desc_label.pack(side='left')
+        self.miles_label.pack(side='left')
+        
+
         self.prompt_label.pack(side='left')
         self.kilo_entry.pack(side='left')
 
-        self.topframe.pack()
-        self.bottomframe.pack()
+        self.topframe.pack(side='top')
+        self.midframe.pack(side='top')
+        self.bottomframe.pack(side='top')
 
         self.calc_button = tkinter.Button(self.main_window,text='Convert',command=self.convert)
         self.quitbutton = tkinter.Button(self.main_window,text='Quit',command=self.main_window.destroy)
@@ -34,8 +46,14 @@ class MyGUI:
 
         miles = round(kilo * 0.6214,2)
 
-        tkinter.messagebox.showinfo('Results', str(kilo) + 'kilometers is equal to ' + str(miles) + 'miles')
+        #tkinter.messagebox.showinfo('Results', str(kilo) + 'kilometers is equal to ' + str(miles) + 'miles')
+
+        self.miles_var.set(miles)
 
 myGUI = MyGUI()
 
 print('Hi there!')
+
+
+
+
